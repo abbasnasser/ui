@@ -39,3 +39,18 @@
   --ui-sidebar-badge: #ececec;
   --ui-sidebar-badge-text: #171717;
 }
+
+/* Brand and status. Primary actions use the brand blue, as Kumo's default theme does. */
+:root {
+  --ui-brand: #1d4ed8;
+  --ui-brand-hover: #1e40af;
+  --ui-brand-tint: #e8f0fe;
+  --ui-success: #15803d;
+  --ui-success-tint: #e7f6ec;
+  --ui-warning: #b45309;
+  --ui-warning-tint: #fdf3e1;
+}
+:root {
+  --ui-contrast: #171717;
+  --ui-contrast-text: #ffffff;
+}
