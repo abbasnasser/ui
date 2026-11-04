@@ -27,7 +27,7 @@ This adds the two Tailwind lines below to the global stylesheet. Run it once per
 
 ## Layout
 
-- `src/tokens.css` — colour, line and radius tokens (`--ui-*`).
+- `src/theme.css` — the theme: semantic colour variables (light in `:root`, dark in `.dark`) mapped to Tailwind utilities.
 - `src/utils.ts` — `cn()` class merging.
 - `src/button.tsx` — `Button` with `primary`, `secondary`, `ghost`, `destructive` variants.
 
@@ -64,3 +64,23 @@ Everything beyond `key`, `label` and `href` is optional:
 
 Colours come from the `--ui-sidebar-*` tokens. Icons must be centred in their box; set `iconOffset` in pixels
 for any icon whose glyph sits off-centre. The chevron is drawn with SVG, so the library needs no icon font.
+
+## Theming (shadcn style)
+
+Components never use hex values. They use semantic utilities such as `bg-primary`, `text-muted-foreground`
+and `border-border`, which come from the variables in `src/theme.css`:
+
+- Light values in `:root`, dark values in `.dark`. Add `class="dark"` to `<html>` for dark mode.
+- `--radius` sets every corner: `rounded-sm`, `rounded-md` and `rounded-lg` follow it.
+
+To restyle an app, override the variables in its own CSS, after the import:
+
+    @import "@abbasnasser/ui/styles.css";
+
+    :root {
+      --primary: oklch(0.55 0.2 260);
+      --radius: 0.25rem;
+    }
+
+To add a theme, define a new block of variables (for example `.theme-green { --primary: ...; }`) and put
+that class on the element that should use it. Keep the same variable names, so every component still works.

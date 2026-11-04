@@ -10,8 +10,8 @@ export function FieldLabel(props: React.ComponentPropsWithoutRef<typeof Label>) 
   return <Label {...props} />;
 }
 export function FieldDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-[12px] text-[var(--ui-text-muted)]", className)} {...props} />;
+  return <p className={cn("text-[12px] text-muted-foreground", className)} {...props} />;
 }
 export function FieldError({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p role="alert" className={cn("text-[12px] text-[var(--ui-danger)]", className)} {...props} />;
+  return <p role="alert" className={cn("text-[12px] text-destructive", className)} {...props} />;
 }

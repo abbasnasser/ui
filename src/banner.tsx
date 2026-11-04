@@ -3,14 +3,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "./utils";
 
 const bannerVariants = cva(
-  "flex items-start gap-3 rounded-[var(--ui-radius-md)] border px-3 py-2.5 text-[13px]",
+  "flex items-start gap-3 rounded-md border px-3 py-2.5 text-[13px]",
   {
     variants: {
       tone: {
-        info: "border-[#bfd4fb] bg-[var(--ui-brand-tint)] text-[#1e3a8a]",
-        success: "border-[#b7e0c4] bg-[var(--ui-success-tint)] text-[#14532d]",
-        warning: "border-[#f2d49b] bg-[var(--ui-warning-tint)] text-[#7a3e00]",
-        danger: "border-[#f3b8b8] bg-[#fdecec] text-[#9b1c1c]",
+        info: "border-info/30 bg-info/10 text-foreground [&_p]:text-info",
+        success: "border-success/30 bg-success/10 text-foreground [&_p]:text-success",
+        warning: "border-warning/30 bg-warning/10 text-foreground [&_p]:text-warning",
+        danger: "border-destructive/30 bg-destructive/10 text-foreground [&_p]:text-destructive",
       },
     },
     defaultVariants: { tone: "info" },

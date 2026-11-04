@@ -14,13 +14,13 @@ export function Meter({ value, max = 100, label, valueText, className, ...props 
   return (
     <div className={cn("flex flex-col gap-1.5", className)} {...props}>
       {label || valueText ? (
-        <div className="flex items-center justify-between text-[12px] text-[var(--ui-text-muted)]">
+        <div className="flex items-center justify-between text-[12px] text-muted-foreground">
           <span>{label}</span>
           <span className="tabular-nums">{valueText}</span>
         </div>
       ) : null}
-      <div role="meter" aria-valuenow={value} aria-valuemin={0} aria-valuemax={max} className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--ui-line-strong)]">
-        <div className="h-full rounded-full bg-[var(--ui-brand)] transition-[width] duration-300" style={{ width: `${pct}%` }} />
+      <div role="meter" aria-valuenow={value} aria-valuemin={0} aria-valuemax={max} className="h-1.5 w-full overflow-hidden rounded-full bg-input">
+        <div className="h-full rounded-full bg-primary transition-[width] duration-300" style={{ width: `${pct}%` }} />
       </div>
     </div>
   );

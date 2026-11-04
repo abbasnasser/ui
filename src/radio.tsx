@@ -18,12 +18,12 @@ export const RadioGroupItem = React.forwardRef<
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
-        "size-4 shrink-0 rounded-full border border-[var(--ui-line-strong)] bg-[var(--ui-control)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--ui-focus)]/40 data-[state=checked]:border-[var(--ui-brand)] disabled:cursor-not-allowed disabled:opacity-50",
+        "size-4 shrink-0 rounded-full border border-input bg-background outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/40 data-[state=checked]:border-primary disabled:cursor-not-allowed disabled:opacity-50",
         className,
       )}
       {...props}
     >
-      <RadioGroupPrimitive.Indicator className="relative flex size-full items-center justify-center after:block after:size-2 after:rounded-full after:bg-[var(--ui-brand)]" />
+      <RadioGroupPrimitive.Indicator className="relative flex size-full items-center justify-center after:block after:size-2 after:rounded-full after:bg-primary" />
     </RadioGroupPrimitive.Item>
   );
 });

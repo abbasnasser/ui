@@ -157,7 +157,7 @@ export function Sidebar({
       <aside
         aria-label="Sidebar"
         className={cn(
-          "absolute inset-y-0 start-0 z-40 flex h-full flex-col overflow-hidden border-e border-[var(--ui-sidebar-border)] bg-[var(--ui-sidebar-bg)] transition-[width] duration-[250ms]",
+          "absolute inset-y-0 start-0 z-40 flex h-full flex-col overflow-hidden border-e border-sidebar-border bg-sidebar transition-[width] duration-[250ms]",
           collapsed && !peek ? EASE_CLOSE : EASE_OPEN,
           collapsed && peek ? "w-[259px]" : "w-full",
         )}
@@ -189,12 +189,12 @@ function DefaultLink({ href, ...props }: LinkProps) {
 
 // Metrics from the reference: 32px rows, 13px text, selected fill #f3f3f3.
 const itemBase =
-  "flex items-center gap-2 overflow-hidden rounded-lg text-left text-[13px] font-normal text-[var(--ui-sidebar-text)] h-[34px]";
+  "flex items-center gap-2 overflow-hidden rounded-lg text-left text-[13px] font-normal text-sidebar-foreground h-[34px]";
 const collapsedItem = "min-w-0 flex-1 justify-center px-0 gap-0";
 const appBase =
-  "flex items-center gap-3 overflow-hidden rounded-lg ps-3 pe-2 text-left text-[13px] font-medium text-[var(--ui-sidebar-text)] h-[34px]";
-const activeClasses = "bg-[var(--ui-sidebar-selected)] font-medium";
-const soonClasses = "text-[var(--ui-sidebar-soon)] cursor-default";
+  "flex items-center gap-3 overflow-hidden rounded-lg ps-3 pe-2 text-left text-[13px] font-medium text-sidebar-foreground h-[34px]";
+const activeClasses = "bg-sidebar-accent font-medium";
+const soonClasses = "text-muted-foreground cursor-default";
 
 type LinkComponentType = React.ComponentType<LinkProps>;
 
@@ -316,7 +316,7 @@ function AppRow({
           <span className="flex items-center gap-3">
             <span
               style={{ translate: `${app.iconOffset ?? 0}px 0` }}
-              className="flex h-5 w-4 shrink-0 items-center justify-center text-[14px] leading-none text-[var(--ui-sidebar-icon)] [&>*]:!size-[14px] [&>*]:!text-[14px] [&>*]:!leading-none"
+              className="flex h-5 w-4 shrink-0 items-center justify-center text-[14px] leading-none text-sidebar-foreground/75 [&>*]:!size-[14px] [&>*]:!text-[14px] [&>*]:!leading-none"
             >
               {app.icon ?? <span className="text-[12px] leading-none font-semibold uppercase">{app.label.charAt(0)}</span>}
             </span>
@@ -332,7 +332,7 @@ function AppRow({
             {app.soon && (
               <span
                 className={cn(
-                  "ms-auto overflow-hidden rounded bg-[var(--ui-sidebar-badge)] text-[11px] font-medium whitespace-nowrap text-[var(--ui-sidebar-badge-text)] transition-[opacity,max-width,padding] duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none",
+                  "ms-auto overflow-hidden rounded bg-muted text-[11px] font-medium whitespace-nowrap text-sidebar-foreground transition-[opacity,max-width,padding] duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none",
                   collapsed ? "max-w-0 px-0 opacity-0" : "max-w-[80px] px-1.5 py-0.5",
                 )}
               >
@@ -351,7 +351,7 @@ function AppRow({
             aria-label={`${open ? "Collapse" : "Expand"} ${app.label}`}
             tabIndex={collapsed ? -1 : undefined}
             className={cn(
-              "flex h-8 shrink-0 items-center justify-center overflow-hidden rounded text-[var(--ui-sidebar-muted)] transition-[width,opacity] duration-200 ease-out hover:text-[var(--ui-sidebar-text)] motion-reduce:transition-none",
+              "flex h-8 shrink-0 items-center justify-center overflow-hidden rounded text-muted-foreground transition-[width,opacity] duration-200 ease-out hover:text-sidebar-foreground motion-reduce:transition-none",
               collapsed ? "w-0 opacity-0" : "w-8",
             )}
           >
@@ -471,7 +471,7 @@ function PageLink({
   // Tree line: one vertical line down the left, from the app icon to the last page.
   const treeItem = tree
     ? cn(
-        "relative ps-[9px] pe-[5px] py-px before:absolute before:start-0 before:top-0 before:border-s before:border-[var(--ui-sidebar-border)] before:content-['']",
+        "relative ps-[9px] pe-[5px] py-px before:absolute before:start-0 before:top-0 before:border-s before:border-sidebar-border before:content-['']",
         last ? "before:h-1/2" : "before:h-full",
       )
     : "py-px";
@@ -482,14 +482,14 @@ function PageLink({
     collapsed ? collapsedItem : "ps-3 pe-2 w-full",
     "transition-[opacity,translate] duration-300 motion-reduce:transition-none",
     open ? "translate-y-0 opacity-100 ease-out" : "translate-y-1 opacity-0 ease-[cubic-bezier(0.8,0,1,1)]",
-    !ready && "cursor-default text-[var(--ui-sidebar-soon)]",
+    !ready && "cursor-default text-muted-foreground",
   );
   const stagger = { transitionDelay: `${(open ? index : total - 1 - index) * 50}ms` };
   const body = (
     <>
       {!collapsed && <span className="truncate">{page.label}</span>}
       {!collapsed && !ready && (
-        <span className="ms-auto rounded bg-[var(--ui-sidebar-badge)] px-1.5 py-0.5 text-[11px] font-medium whitespace-nowrap text-[var(--ui-sidebar-badge-text)]">
+        <span className="ms-auto rounded bg-muted px-1.5 py-0.5 text-[11px] font-medium whitespace-nowrap text-sidebar-foreground">
           Soon
         </span>
       )}

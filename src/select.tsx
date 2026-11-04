@@ -15,14 +15,14 @@ export const SelectTrigger = React.forwardRef<
     <SelectPrimitive.Trigger
       ref={ref}
       className={cn(
-        "inline-flex h-8 w-full items-center justify-between gap-2 rounded-[var(--ui-radius-md)] border border-[var(--ui-line-strong)] bg-[var(--ui-control)] px-2.5 text-[13px] text-[var(--ui-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--ui-focus)]/40 data-[placeholder]:text-[var(--ui-text-faint)] disabled:opacity-50",
+        "inline-flex h-8 w-full items-center justify-between gap-2 rounded-md border border-input bg-background px-2.5 text-[13px] text-foreground outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/40 data-[placeholder]:text-subtle-foreground disabled:opacity-50",
         className,
       )}
       {...props}
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <svg viewBox="0 0 10 10" width={10} height={10} aria-hidden className="text-[var(--ui-text-muted)]">
+        <svg viewBox="0 0 10 10" width={10} height={10} aria-hidden className="text-muted-foreground">
           <path d="M2 3.5 5 6.5 8 3.5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
         </svg>
       </SelectPrimitive.Icon>
@@ -41,7 +41,7 @@ export const SelectContent = React.forwardRef<
         position={position}
         sideOffset={4}
         className={cn(
-          "z-50 max-h-[var(--radix-select-content-available-height)] min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-[var(--ui-radius-md)] border border-[var(--ui-line)] bg-[var(--ui-canvas)] p-1 text-[13px] text-[var(--ui-text)] shadow-md",
+          "z-50 max-h-[var(--radix-select-content-available-height)] min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-md border border-border bg-background p-1 text-[13px] text-foreground shadow-md",
           className,
         )}
         {...props}
@@ -60,7 +60,7 @@ export const SelectItem = React.forwardRef<
     <SelectPrimitive.Item
       ref={ref}
       className={cn(
-        "relative flex h-8 cursor-default items-center rounded-[var(--ui-radius-sm)] py-1 ps-7 pe-2 outline-none select-none data-[highlighted]:bg-[var(--ui-recessed)] data-[disabled]:opacity-50",
+        "relative flex h-8 cursor-default items-center rounded-sm py-1 ps-7 pe-2 outline-none select-none data-[highlighted]:bg-muted data-[disabled]:opacity-50",
         className,
       )}
       {...props}

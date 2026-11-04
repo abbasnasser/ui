@@ -1,0 +1,138 @@
+/*
+ * Theme for the shared UI library, written the way shadcn/ui does it: semantic colour variables in :root
+ * (light) and .dark (dark), mapped to Tailwind utilities with @theme inline. Components use the utilities
+ * (bg-primary, text-muted-foreground, border-border), never hex values, so a theme changes every component.
+ *
+ * An app adopts the library with @import "@abbasnasser/ui/styles.css"; to restyle it, override the variables
+ * in the app's own CSS, for example:
+ *
+ *   :root { --primary: oklch(0.55 0.2 260); --radius: 0.25rem; }
+ */
+
+:root {
+  --radius: 0.5rem;
+
+  --background: #ffffff;
+  --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+  --primary: #1d4ed8;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f3f3;
+  --secondary-foreground: #171717;
+  --muted: #f3f3f3;
+  --muted-foreground: #6b6b6b;
+  --subtle-foreground: #8a8a8a;
+  --accent: #f3f3f3;
+  --accent-foreground: #171717;
+  --destructive: #c81e1e;
+  --destructive-foreground: #ffffff;
+  --success: #15803d;
+  --success-foreground: #ffffff;
+  --warning: #b45309;
+  --warning-foreground: #ffffff;
+  --info: #1d4ed8;
+  --info-foreground: #ffffff;
+  --border: rgb(20 20 20 / 0.1);
+  --input: rgb(20 20 20 / 0.18);
+  --ring: #2563eb;
+  --tooltip: #171717;
+  --tooltip-foreground: #ffffff;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #3a3a3a;
+  --sidebar-border: #e3e3e3;
+  --sidebar-accent: #f3f3f3;
+  --sidebar-accent-foreground: #171717;
+}
+
+.dark {
+  --background: #0f0f10;
+  --foreground: #f4f4f5;
+  --card: #17171a;
+  --card-foreground: #f4f4f5;
+  --popover: #17171a;
+  --popover-foreground: #f4f4f5;
+  --primary: #5b8cff;
+  --primary-foreground: #0b1220;
+  --secondary: #232327;
+  --secondary-foreground: #f4f4f5;
+  --muted: #232327;
+  --muted-foreground: #a1a1aa;
+  --subtle-foreground: #71717a;
+  --accent: #232327;
+  --accent-foreground: #f4f4f5;
+  --destructive: #f87171;
+  --destructive-foreground: #1a0606;
+  --success: #4ade80;
+  --success-foreground: #052e16;
+  --warning: #fbbf24;
+  --warning-foreground: #1c1300;
+  --info: #5b8cff;
+  --info-foreground: #0b1220;
+  --border: rgb(255 255 255 / 0.1);
+  --input: rgb(255 255 255 / 0.16);
+  --ring: #5b8cff;
+  --tooltip: #f4f4f5;
+  --tooltip-foreground: #0f0f10;
+
+  --sidebar: #17171a;
+  --sidebar-foreground: #d4d4d8;
+  --sidebar-border: rgb(255 255 255 / 0.1);
+  --sidebar-accent: #232327;
+  --sidebar-accent-foreground: #f4f4f5;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-tooltip: var(--tooltip);
+  --color-tooltip-foreground: var(--tooltip-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: calc(var(--radius) - 0px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

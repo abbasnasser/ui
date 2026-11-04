@@ -4,15 +4,15 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "./utils";
 
 export const buttonVariants = cva(
-  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-[var(--ui-radius-md)] text-[13px] font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--ui-focus)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md text-[13px] font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        primary: "bg-[var(--ui-brand)] text-white hover:bg-[var(--ui-brand-hover)]",
+        primary: "bg-primary text-primary-foreground hover:bg-primary/90",
         secondary:
-          "border border-[var(--ui-line-strong)] bg-[var(--ui-control)] text-[var(--ui-text)] hover:bg-[var(--ui-recessed)]",
-        ghost: "text-[var(--ui-text)] hover:bg-[var(--ui-recessed)]",
-        destructive: "bg-[var(--ui-danger)] text-white hover:bg-[var(--ui-danger-hover)]",
+          "border border-input bg-background text-foreground hover:bg-muted",
+        ghost: "text-foreground hover:bg-muted",
+        destructive: "bg-destructive text-primary-foreground hover:bg-destructive/90",
       },
       size: {
         sm: "h-8 px-3",

@@ -7,7 +7,7 @@ export function ButtonGroup({ className, ...props }: React.HTMLAttributes<HTMLDi
     <div
       role="group"
       className={cn(
-        "inline-flex items-stretch [&>*]:rounded-none [&>*:first-child]:rounded-s-[var(--ui-radius-md)] [&>*:last-child]:rounded-e-[var(--ui-radius-md)] [&>*:not(:first-child)]:-ms-px",
+        "inline-flex items-stretch [&>*]:rounded-none [&>*:first-child]:rounded-s-md [&>*:last-child]:rounded-e-md [&>*:not(:first-child)]:-ms-px",
         className,
       )}
       {...props}

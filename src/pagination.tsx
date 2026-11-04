@@ -19,8 +19,8 @@ export function PaginationLink({
       type="button"
       aria-current={active ? "page" : undefined}
       className={cn(
-        "inline-flex h-8 min-w-8 items-center justify-center rounded-[var(--ui-radius-md)] px-2 text-[var(--ui-text-muted)] transition-colors hover:bg-[var(--ui-recessed)] hover:text-[var(--ui-text)] disabled:pointer-events-none disabled:opacity-40",
-        active && "bg-[var(--ui-recessed)] font-medium text-[var(--ui-text)]",
+        "inline-flex h-8 min-w-8 items-center justify-center rounded-md px-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40",
+        active && "bg-muted font-medium text-foreground",
         className,
       )}
       {...props}

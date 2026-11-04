@@ -5,7 +5,7 @@ export function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElemen
   return (
     <div
       className={cn(
-        "rounded-[var(--ui-radius-lg)] border border-[var(--ui-line)] bg-[var(--ui-canvas)] text-[var(--ui-text)]",
+        "rounded-lg border border-border bg-background text-foreground",
         className,
       )}
       {...props}
@@ -22,7 +22,7 @@ export function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHead
 }
 
 export function CardDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-[13px] text-[var(--ui-text-muted)]", className)} {...props} />;
+  return <p className={cn("text-[13px] text-muted-foreground", className)} {...props} />;
 }
 
 export function CardContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
@@ -32,7 +32,7 @@ export function CardContent({ className, ...props }: React.HTMLAttributes<HTMLDi
 export function CardFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("flex items-center gap-2 border-t border-[var(--ui-line)] px-4 py-3", className)}
+      className={cn("flex items-center gap-2 border-t border-border px-4 py-3", className)}
       {...props}
     />
   );

@@ -7,7 +7,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, React.AnchorHTMLAttribut
     return (
       <a
         ref={ref}
-        className={cn("text-[var(--ui-brand)] underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ui-focus)]/40 rounded-sm", className)}
+        className={cn("text-primary underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 rounded-sm", className)}
         {...props}
       />
     );
