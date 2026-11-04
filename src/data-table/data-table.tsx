@@ -74,11 +74,13 @@ export interface DataTableProps<TData, TValue = unknown> {
   onSelectionChange?: (selection: RowSelectionState) => void;
   /** Bulk actions shown when rows are selected. Receives the selected rows. */
   bulkActions?: (selected: TData[], clear: () => void) => React.ReactNode;
-  /** Enables pagination on the client, with this page size. Use `server` for paging on the server. */
+  /** Pages the rows. On by default; set false to show every row in one list. */
+  pagination?: boolean;
+  /** Rows per page on the client. Use `server` for paging on the server. */
   pageSize?: number;
   pageSizeOptions?: number[];
   server?: DataTableServerState;
-  /** Client-side sorting is on by default. Set false for a static table. */
+  /** Sorting on every column. On by default. A single column can opt out with `enableSorting: false` in its definition. */
   sortable?: boolean;
   /** Controlled sorting for a client table. */
   sorting?: SortingState;
@@ -107,6 +109,7 @@ export function DataTable<TData, TValue = unknown>({
   selection,
   onSelectionChange,
   bulkActions,
+  pagination = true,
   pageSize = 10,
   pageSizeOptions = [10, 25, 50, 100],
   server,
@@ -124,7 +127,7 @@ export function DataTable<TData, TValue = unknown>({
   const [internalSelection, setInternalSelection] = React.useState<RowSelectionState>({});
   const [visibility, setVisibility] = React.useState<VisibilityState>({});
   const [search, setSearch] = React.useState("");
-  const [pagination, setPagination] = React.useState<PaginationState>({ pageIndex: 0, pageSize });
+  const [pageState, setPageState] = React.useState<PaginationState>({ pageIndex: 0, pageSize });
   const [expanded, setExpanded] = React.useState<ExpandedState>({});
 
   const isServer = Boolean(server);
@@ -180,7 +183,7 @@ export function DataTable<TData, TValue = unknown>({
       rowSelection,
       columnVisibility: visibility,
       globalFilter,
-      pagination: isServer ? { pageIndex: server!.pageIndex, pageSize: server!.pageSize } : pagination,
+      pagination: isServer ? { pageIndex: server!.pageIndex, pageSize: server!.pageSize } : pageState,
       expanded,
     },
     getRowId,
@@ -188,9 +191,9 @@ export function DataTable<TData, TValue = unknown>({
     onRowSelectionChange: setSelection,
     onColumnVisibilityChange: setVisibility,
     onPaginationChange: (updater) => {
-      const next = resolve(updater, isServer ? { pageIndex: server!.pageIndex, pageSize: server!.pageSize } : pagination);
+      const next = resolve(updater, isServer ? { pageIndex: server!.pageIndex, pageSize: server!.pageSize } : pageState);
       if (isServer) server!.onPaginationChange(next);
-      else setPagination(next);
+      else setPageState(next);
     },
     onExpandedChange: setExpanded,
     enableSorting: sortable,
@@ -198,7 +201,7 @@ export function DataTable<TData, TValue = unknown>({
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    getPaginationRowModel: pagination || isServer ? getPaginationRowModel() : undefined,
     getExpandedRowModel: getExpandedRowModel(),
     manualSorting: isServer,
     manualPagination: isServer,
@@ -340,7 +343,7 @@ export function DataTable<TData, TValue = unknown>({
         </table>
       </div>
 
-      {pageSize || server ? <Pagination table={table} pageSizeOptions={pageSizeOptions} isServer={isServer} /> : null}
+      {pagination || isServer ? <Pagination table={table} pageSizeOptions={pageSizeOptions} isServer={isServer} /> : null}
     </div>
   );
 }

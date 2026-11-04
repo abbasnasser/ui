@@ -122,5 +122,9 @@ Columns are plain TanStack `ColumnDef` objects. Example:
       bulkActions={(rows) => <Button size="sm">Export {rows.length}</Button>}
     />
 
+Every feature is a prop you can turn off. Sorting is on by default (`sortable={false}` turns it off everywhere;
+a column can opt out with `enableSorting: false`). Pagination is on by default (`pagination={false}` shows all rows).
+Search, selection, column visibility, expansion and the empty and loading states are off until their prop is set.
+
 Tested here: each main configuration renders on the server. Sorting, selection and expansion have not yet been
 exercised in a browser.
