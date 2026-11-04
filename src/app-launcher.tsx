@@ -92,11 +92,11 @@ export function AppTile({
       aria-disabled={soon || undefined}
       tabIndex={soon ? -1 : undefined}
       className={cn(
-        "flex flex-col items-center gap-2 rounded px-2 py-3 text-center text-[13px] leading-tight text-foreground outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring",
+        "flex flex-col items-center gap-2 rounded-md px-2 py-3 text-center text-[13px] leading-tight text-foreground outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring",
         soon && "pointer-events-none opacity-50",
       )}
     >
-      <span className={cn("flex size-12 shrink-0 items-center justify-center rounded text-white shadow-sm [&>svg]:size-[22px]", TONE_BG[tone])}>
+      <span className={cn("flex size-12 shrink-0 items-center justify-center rounded-md text-white shadow-sm [&>svg]:size-[22px]", TONE_BG[tone])}>
         {icon}
       </span>
       <span className="line-clamp-2">{label}</span>
@@ -138,7 +138,7 @@ export function AppLauncher({
           type="button"
           aria-label={triggerLabel}
           aria-expanded={open}
-          className={cn("size-10 rounded text-foreground hover:bg-muted", className)}
+          className={cn("size-10 rounded-md text-foreground hover:bg-muted", className)}
         >
           <GripIcon className="size-5" />
         </Button>
@@ -160,7 +160,7 @@ export function AppLauncher({
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Find an app"
               aria-label="Find an app"
-              className="h-10 w-full rounded border-0 bg-muted ps-9 pe-3 text-[13px] focus:ring-2 focus:ring-ring"
+              className="h-10 w-full rounded-md border-0 bg-muted ps-9 pe-3 text-[13px] focus:ring-2 focus:ring-ring"
             />
           </div>
         </div>

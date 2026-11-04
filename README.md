@@ -85,6 +85,15 @@ To restyle an app, override the variables in its own CSS, after the import:
 To add a theme, define a new block of variables (for example `.theme-green { --primary: ...; }`) and put
 that class on the element that should use it. Keep the same variable names, so every component still works.
 
+## Style
+
+The library uses the soft style. Use the scale and don't hard-code values:
+
+- **Radius:** controls (buttons, inputs, selects) 8px, `rounded-md`. Cards, popovers and tables 12px, `rounded-lg`. Tiny chips and tooltips 6px, `rounded-sm`. Large surfaces 16px, `rounded-xl`.
+- **Borders:** 1px, `border-border` (10% alpha) for panels, `border-input` (18% alpha) for form fields.
+- **Shadows:** `shadow-sm` on cards, `shadow-md` on menus, popovers and tooltips, `shadow-lg` on dialogs and sheets.
+- **Control height:** 36px for inputs, selects and default buttons. 32px for `size="sm"` buttons.
+
 ## App launcher
 
 `AppLauncher` is the workspace's app menu, the same as the Talabetak DMS launcher. It renders a grip button

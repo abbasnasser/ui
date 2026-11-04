@@ -266,7 +266,7 @@ export function DataTable<TData, TValue = unknown>({
                         <button
                           type="button"
                           onClick={header.column.getToggleSortingHandler()}
-                          className="-mx-1 inline-flex items-center gap-1 rounded px-1 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/40 outline-none"
+                          className="-mx-1 inline-flex items-center gap-1 rounded-md px-1 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/40 outline-none"
                         >
                           {flexRender(header.column.columnDef.header, header.getContext())}
                           <SortIcon direction={sortState} />
@@ -285,7 +285,7 @@ export function DataTable<TData, TValue = unknown>({
               ? Array.from({ length: Math.min(pageSize, 5) }).map((_, i) => (
                   <tr key={`skeleton-${i}`} className="border-b border-border last:border-0">
                     <td colSpan={colSpan} className={cn("px-3", rowPad)}>
-                      <div className="h-4 w-full animate-pulse rounded bg-muted motion-reduce:animate-none" />
+                      <div className="h-4 w-full animate-pulse rounded-md bg-muted motion-reduce:animate-none" />
                     </td>
                   </tr>
                 ))
@@ -309,7 +309,7 @@ export function DataTable<TData, TValue = unknown>({
                               e.stopPropagation();
                               row.toggleExpanded();
                             }}
-                            className="inline-flex size-6 items-center justify-center rounded text-muted-foreground hover:bg-muted hover:text-foreground"
+                            className="inline-flex size-6 items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground"
                           >
                             <svg viewBox="0 0 10 10" width={9} height={9} aria-hidden className={cn("transition-transform", row.getIsExpanded() && "rotate-90")}>
                               <path d="M3 1.5 7 5 3 8.5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />

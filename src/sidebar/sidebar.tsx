@@ -332,7 +332,7 @@ function AppRow({
             {app.soon && (
               <span
                 className={cn(
-                  "ms-auto overflow-hidden rounded bg-muted text-[11px] font-medium whitespace-nowrap text-sidebar-foreground transition-[opacity,max-width,padding] duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none",
+                  "ms-auto overflow-hidden rounded-md bg-muted text-[11px] font-medium whitespace-nowrap text-sidebar-foreground transition-[opacity,max-width,padding] duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none",
                   collapsed ? "max-w-0 px-0 opacity-0" : "max-w-[80px] px-1.5 py-0.5",
                 )}
               >
@@ -351,7 +351,7 @@ function AppRow({
             aria-label={`${open ? "Collapse" : "Expand"} ${app.label}`}
             tabIndex={collapsed ? -1 : undefined}
             className={cn(
-              "flex h-8 shrink-0 items-center justify-center overflow-hidden rounded text-muted-foreground transition-[width,opacity] duration-200 ease-out hover:text-sidebar-foreground motion-reduce:transition-none",
+              "flex h-8 shrink-0 items-center justify-center overflow-hidden rounded-md text-muted-foreground transition-[width,opacity] duration-200 ease-out hover:text-sidebar-foreground motion-reduce:transition-none",
               collapsed ? "w-0 opacity-0" : "w-8",
             )}
           >
@@ -489,7 +489,7 @@ function PageLink({
     <>
       {!collapsed && <span className="truncate">{page.label}</span>}
       {!collapsed && !ready && (
-        <span className="ms-auto rounded bg-muted px-1.5 py-0.5 text-[11px] font-medium whitespace-nowrap text-sidebar-foreground">
+        <span className="ms-auto rounded-md bg-muted px-1.5 py-0.5 text-[11px] font-medium whitespace-nowrap text-sidebar-foreground">
           Soon
         </span>
       )}
