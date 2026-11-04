@@ -1,4 +1,4 @@
-# @your-scope/ui
+# @abbasnasser/ui
 
 Shared component library for our apps. Cloudflare-style density and tokens, built on Radix primitives
 (the same base as the shadcn code in our apps).
@@ -7,17 +7,23 @@ Shared component library for our apps. Cloudflare-style density and tokens, buil
 
 Apps must also scan the library's classes, because Tailwind v4 skips node_modules:
 
-    @source "../node_modules/@your-scope/ui/dist/**/*.js";
+    @source "../node_modules/@abbasnasser/ui/dist/**/*.js";
 
-    npm install @your-scope/ui
+    npm install @abbasnasser/ui
 
 In the app's global CSS (Tailwind v4):
 
-    @import "@your-scope/ui/styles.css";
+    @import "@abbasnasser/ui/styles.css";
 
 Then:
 
-    import { Button } from "@your-scope/ui";
+    import { Button } from "@abbasnasser/ui";
+
+## Start a new app
+
+    npx @abbasnasser/ui ui-init src/app/globals.css
+
+This adds the two Tailwind lines below to the global stylesheet. Run it once per app.
 
 ## Layout
 
