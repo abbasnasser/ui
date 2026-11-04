@@ -416,7 +416,8 @@ function Pagination<TData>({
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {pageSizeOptions.map((n) => (
+              {/* The current size is always listed, even when it is not one of the standard options. */}
+              {[...new Set([...pageSizeOptions, pageSize])].sort((x, y) => x - y).map((n) => (
                 <SelectItem key={n} value={String(n)}>
                   {n}
                 </SelectItem>
