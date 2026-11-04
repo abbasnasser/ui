@@ -40,3 +40,20 @@ This adds the two Tailwind lines below to the global stylesheet. Run it once per
 ## Status
 
 Version 0.1.0. Private; not published yet. The package scope is a placeholder until the npm scope is chosen.
+
+## Sidebar
+
+`Sidebar` is the Talabetak staff sidebar made generic: apps with pages in a tree, a 56px icon rail that opens
+over the content, and Ctrl/Cmd+B to collapse. It takes plain data, so it has no router or permission code:
+
+    <Sidebar
+      apps={[{ key: "orders", label: "Orders", href: "/orders", icon: <OrdersIcon />,
+               pages: [{ key: "list", label: "All orders", href: "/orders/list" }] }]}
+      activePath={pathname}
+      collapsed={collapsed}
+      onCollapsedChange={setCollapsed}
+      LinkComponent={Link} // for example Next.js's Link
+    />
+
+Colours come from the `--ui-sidebar-*` tokens. Icons must be centred in their box; set `iconOffset` in pixels
+for any icon whose glyph sits off-centre. The chevron is drawn with SVG, so the library needs no icon font.

@@ -26,3 +26,16 @@
   --ui-radius-md: 8px;
   --ui-radius-lg: 12px;
 }
+
+/* Sidebar. Defaults match the Talabetak staff sidebar, so apps that adopt the library look the same. */
+:root {
+  --ui-sidebar-bg: #ffffff;
+  --ui-sidebar-border: #e3e3e3;
+  --ui-sidebar-text: #3a3a3a;
+  --ui-sidebar-icon: #525252;
+  --ui-sidebar-muted: #a0a0a0;
+  --ui-sidebar-soon: #9a9a9a;
+  --ui-sidebar-selected: #f3f3f3;
+  --ui-sidebar-badge: #ececec;
+  --ui-sidebar-badge-text: #171717;
+}

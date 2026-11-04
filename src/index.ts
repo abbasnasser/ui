@@ -16,3 +16,4 @@ export {
   DialogFooter,
 } from "./dialog";
 export { PageHeader, type PageHeaderProps } from "./page-header";
+export { Sidebar, type SidebarProps, type SidebarApp, type SidebarPage } from "./sidebar/sidebar";
