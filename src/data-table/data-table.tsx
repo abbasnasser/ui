@@ -212,7 +212,7 @@ export function DataTable<TData, TValue = unknown>({
   const visibleRows = table.getRowModel().rows;
   const selectedRows = table.getSelectedRowModel().rows.map((r) => r.original);
   const colSpan = table.getVisibleLeafColumns().length + (renderExpanded ? 1 : 0);
-  const rowPad = density === "compact" ? "py-1" : "py-2.5";
+  const rowPad = density === "compact" ? "py-1.5" : "py-3";
   const noRows = !loading && visibleRows.length === 0;
 
   return (
@@ -248,7 +248,7 @@ export function DataTable<TData, TValue = unknown>({
 
       <div className={cn("relative w-full overflow-auto rounded-lg border border-border", stickyHeader && "max-h-[480px]")}>
         <table className="w-full caption-bottom text-[13px]" aria-busy={loading || undefined}>
-          <thead className={cn("bg-muted/50", stickyHeader && "sticky top-0 z-10 bg-muted")}>
+          <thead className={cn("bg-muted/40", stickyHeader && "sticky top-0 z-10 bg-muted")}>
             {table.getHeaderGroups().map((group) => (
               <tr key={group.id} className="border-b border-border">
                 {renderExpanded ? <th className="w-8" aria-label="Expand" /> : null}
@@ -260,7 +260,7 @@ export function DataTable<TData, TValue = unknown>({
                       key={header.id}
                       scope="col"
                       aria-sort={sortState === "asc" ? "ascending" : sortState === "desc" ? "descending" : canSort ? "none" : undefined}
-                      className={cn("h-9 px-3 text-start align-middle text-[12px] font-medium whitespace-nowrap text-muted-foreground", header.column.id === "select" && "w-10")}
+                      className={cn("h-11 px-4 text-start align-middle text-[13px] font-medium whitespace-nowrap text-foreground", header.column.id === "select" && "w-10")}
                     >
                       {header.isPlaceholder ? null : canSort ? (
                         <button
@@ -300,7 +300,7 @@ export function DataTable<TData, TValue = unknown>({
                       )}
                     >
                       {renderExpanded ? (
-                        <td className={cn("px-1", rowPad)}>
+                        <td className={cn("px-2", rowPad)}>
                           <button
                             type="button"
                             aria-expanded={row.getIsExpanded()}
@@ -318,7 +318,7 @@ export function DataTable<TData, TValue = unknown>({
                         </td>
                       ) : null}
                       {row.getVisibleCells().map((cell) => (
-                        <td key={cell.id} className={cn("px-3 align-middle text-foreground", rowPad)}>
+                        <td key={cell.id} className={cn("px-4 align-middle text-foreground", rowPad)}>
                           {flexRender(cell.column.columnDef.cell, cell.getContext())}
                         </td>
                       ))}

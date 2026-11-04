@@ -9,7 +9,7 @@ export function Table({ className, ...props }: React.TableHTMLAttributes<HTMLTab
   );
 }
 export function TableHeader({ className, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) {
-  return <thead className={cn("bg-muted/50", className)} {...props} />;
+  return <thead className={cn("bg-muted/40", className)} {...props} />;
 }
 export function TableBody({ className, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) {
   return <tbody className={cn("[&_tr:last-child]:border-0", className)} {...props} />;
@@ -20,11 +20,11 @@ export function TableRow({ className, ...props }: React.HTMLAttributes<HTMLTable
 export function TableHead({ className, ...props }: React.ThHTMLAttributes<HTMLTableCellElement>) {
   return (
     <th
-      className={cn("h-9 px-3 text-start align-middle text-[12px] font-medium text-muted-foreground", className)}
+      className={cn("h-11 px-4 text-start align-middle text-[13px] font-medium text-foreground", className)}
       {...props}
     />
   );
 }
 export function TableCell({ className, ...props }: React.TdHTMLAttributes<HTMLTableCellElement>) {
-  return <td className={cn("px-3 py-2 align-middle text-foreground", className)} {...props} />;
+  return <td className={cn("px-4 py-3 align-middle text-foreground", className)} {...props} />;
 }

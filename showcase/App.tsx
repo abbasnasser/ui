@@ -13,6 +13,7 @@ import {
 } from "../src";
 import { MoreSections } from "./more";
 import { Dashboard } from "./dashboard";
+import { CustomersTable } from "./customers";
 
 /* Small stand-in icons, so the showcase needs no icon font. */
 const Dot = () => <span className="inline-block size-3.5 rounded-sm bg-current opacity-70" />;
@@ -94,7 +95,7 @@ export function App() {
             {[
               ["buttons", "Buttons"], ["forms", "Forms"], ["overlays", "Overlays"], ["navigation", "Navigation"],
               ["data", "Data"], ["feedback", "Feedback"], ["layout", "Layout"], ["sidebar", "Sidebar"], ["launcher", "App launcher"],
-              ["dashboard", "Dashboard"], ["accordion", "Accordion"], ["alerts", "Alerts and dialogs"], ["menus", "Menus and command"], ["forms-more", "More form controls"], ["data-more", "Calendar, chart, carousel"], ["layout-more", "Layout and items"],
+              ["dashboard", "Dashboard"], ["customers", "Customers table"], ["accordion", "Accordion"], ["alerts", "Alerts and dialogs"], ["menus", "Menus and command"], ["forms-more", "More form controls"], ["data-more", "Calendar, chart, carousel"], ["layout-more", "Layout and items"],
             ].map(([id, label]) => (
               <a key={id} href={`#${id}`} className="rounded-md px-2 py-1.5 text-muted-foreground hover:bg-muted hover:text-foreground">{label}</a>
             ))}
@@ -356,6 +357,9 @@ export function App() {
               <Empty title="Nothing to show" description="Shown when no app is open." />
             </Section>
             <Dashboard />
+            <Section id="customers" title="Customers table">
+              <CustomersTable />
+            </Section>
             <MoreSections />
           </main>
         </div>
