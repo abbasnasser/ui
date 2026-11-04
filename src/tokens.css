@@ -1,0 +1,28 @@
+/*
+ * Design tokens for the shared UI library. Values are our own, chosen to read like a dense, quiet
+ * infrastructure dashboard. Apps import this file once and map their shadcn/Tailwind roles onto these.
+ */
+:root {
+  --ui-canvas: #ffffff;
+  --ui-surface: #fbfbfb;
+  --ui-recessed: #f3f3f3;
+  --ui-control: #ffffff;
+  --ui-line: rgb(20 20 20 / 0.1);
+  --ui-line-strong: rgb(20 20 20 / 0.18);
+
+  --ui-text: #171717;
+  --ui-text-muted: #6b6b6b;
+  --ui-text-faint: #8a8a8a;
+
+  --ui-action: #1d1d1d;
+  --ui-action-text: #ffffff;
+  --ui-action-hover: #000000;
+
+  --ui-focus: #2563eb;
+  --ui-danger: #c81e1e;
+  --ui-danger-hover: #a51818;
+
+  --ui-radius-sm: 6px;
+  --ui-radius-md: 8px;
+  --ui-radius-lg: 12px;
+}
