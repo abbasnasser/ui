@@ -87,12 +87,12 @@ that class on the element that should use it. Keep the same variable names, so e
 
 ## Style
 
-The library uses the soft style. Use the scale and don't hard-code values:
+The library uses the Cloudflare style. Use the scale and don't hard-code values:
 
-- **Radius:** controls (buttons, inputs, selects) 8px, `rounded-md`. Cards, popovers and tables 12px, `rounded-lg`. Tiny chips and tooltips 6px, `rounded-sm`. Large surfaces 16px, `rounded-xl`.
-- **Borders:** 1px, `border-border` (10% alpha) for panels, `border-input` (18% alpha) for form fields.
-- **Shadows:** `shadow-sm` on cards, `shadow-md` on menus, popovers and tooltips, `shadow-lg` on dialogs and sheets.
-- **Control height:** 36px for inputs, selects and default buttons. 32px for `size="sm"` buttons.
+- **Radius:** controls (buttons, inputs, selects) 4px, `rounded-md`. Cards, popovers and tables 6px, `rounded-lg`. Small chips 2px, `rounded-sm`. Large surfaces 8px, `rounded-xl`.
+- **Borders:** 1px, `border-border` (10% alpha) for panels, `border-input` (18% alpha) for form fields. Cards are flat with a border and no shadow.
+- **Shadows:** only on floating layers. `shadow-md` on menus, popovers and tooltips, `shadow-lg` on dialogs and sheets.
+- **Control height:** 32px for inputs, selects and default buttons. 28px for `size="sm"` buttons.
 
 ## App launcher
 
