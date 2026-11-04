@@ -128,3 +128,13 @@ Search, selection, column visibility, expansion and the empty and loading states
 
 Tested here: each main configuration renders on the server. Sorting, selection and expansion have not yet been
 exercised in a browser.
+
+## Releasing
+
+Releases are automatic and use changesets.
+
+1. When you change the library, run `npx changeset`, choose the bump (patch, minor or major), and describe the change. Commit the new file in `.changeset/`.
+2. Merge to `main`. The Release workflow opens or updates a "Version packages" pull request.
+3. Merge that pull request. The workflow bumps the version, writes the changelog and publishes to npm.
+
+The workflow needs a repository secret named `NPM_TOKEN` (Settings → Secrets and variables → Actions).
