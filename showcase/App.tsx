@@ -30,9 +30,9 @@ const SIDEBAR_APPS: SidebarApp[] = [
 ];
 
 const LAUNCHER_APPS: LauncherApp[] = [
-  { key: "orders", label: "Orders", href: "#orders", tone: "blue" as AppTone, icon: <Dot />, description: "Incoming and active orders" },
-  { key: "drivers", label: "Drivers", href: "#drivers", tone: "teal", icon: <Dot />, description: "Shifts and assignments" },
-  { key: "reports", label: "Reports", href: "#reports", tone: "purple", icon: <Dot />, description: "Daily and monthly figures" },
+  { key: "orders", label: "Orders", href: "#orders", tone: "blue" as AppTone, icon: <Dot /> },
+  { key: "drivers", label: "Drivers", href: "#drivers", tone: "teal", icon: <Dot /> },
+  { key: "reports", label: "Reports", href: "#reports", tone: "purple", icon: <Dot /> },
   { key: "warehouse", label: "Warehouse", href: "#warehouse", tone: "orange", icon: <Dot />, soon: true },
 ];
 
@@ -349,9 +349,7 @@ export function App() {
 
             <Section id="launcher" title="App launcher">
               <AppLauncher
-                title="Apps"
                 apps={LAUNCHER_APPS}
-                currentKey="orders"
                 createActions={[{ key: "order", label: "New order", href: "#orders/new", tone: "blue", icon: <Dot /> }]}
               />
               <Empty title="Nothing to show" description="Shown when no app is open." />

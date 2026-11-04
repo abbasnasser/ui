@@ -1,5 +1,9 @@
+"use client";
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { Button } from "./button";
+import { Input } from "./input";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
+import { SearchIcon } from "./icons";
 import { cn } from "./utils";
 
 /** Colour of an app's icon tile. Maps to the --tone-* variables in the theme. */
@@ -9,146 +13,203 @@ export type LauncherApp = {
   key: string;
   label: string;
   href: string;
+  /** Any node, for example an SVG icon. It is sized by the tile. */
   icon: React.ReactNode;
   tone?: AppTone;
-  /** A line under the label, for example what the app is for. */
-  description?: string;
-  /** Greys the tile out with a "Soon" badge; it cannot be opened. */
+  /** Greys the tile out and cannot be opened. */
   soon?: boolean;
 };
 
-export type LauncherCreateAction = {
-  key: string;
-  label: string;
-  href: string;
-  icon: React.ReactNode;
-  tone?: AppTone;
-};
+export type LauncherCreateAction = LauncherApp;
 
 type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string };
 
-export interface AppLauncherProps extends Omit<React.HTMLAttributes<HTMLElement>, "children" | "title"> {
+export interface AppLauncherProps {
+  /** Apps in launcher order. Filter by permission before passing them in. */
   apps: LauncherApp[];
-  /** Quick "create" shortcuts shown in a bar above the grid. */
+  /** "Create" shortcuts shown in a row under the grid. Hidden while searching. */
   createActions?: LauncherCreateAction[];
-  /** The key of the app the user is in, marked as current. */
-  currentKey?: string;
   /** Link element to render, for example Next.js's Link. */
   LinkComponent?: React.ComponentType<LinkProps>;
-  /** Heading above the grid, for example "Apps". */
-  title?: React.ReactNode;
+  /** Accessible label for the grip button that opens the launcher. */
+  triggerLabel?: string;
+  className?: string;
 }
 
-const tileVariants = cva(
-  "flex size-10 shrink-0 items-center justify-center rounded-lg text-white [&>*]:!size-[18px] [&>*]:!text-[18px]",
-  {
-    variants: {
-      tone: {
-        blue: "bg-tone-blue",
-        red: "bg-tone-red",
-        orange: "bg-tone-orange",
-        teal: "bg-tone-teal",
-        purple: "bg-tone-purple",
-        green: "bg-tone-green",
-        slate: "bg-tone-slate",
-        pink: "bg-tone-pink",
-      },
-    },
-    defaultVariants: { tone: "blue" },
-  },
-);
+const TONE_BG: Record<AppTone, string> = {
+  blue: "bg-tone-blue",
+  red: "bg-tone-red",
+  orange: "bg-tone-orange",
+  teal: "bg-tone-teal",
+  purple: "bg-tone-purple",
+  green: "bg-tone-green",
+  slate: "bg-tone-slate",
+  pink: "bg-tone-pink",
+};
 
-export interface AppTileProps extends VariantProps<typeof tileVariants> {
-  label: string;
-  icon: React.ReactNode;
-}
-
-/** The coloured icon square used by the launcher. */
-export function AppTile({ icon, tone, className }: AppTileProps & { className?: string }) {
-  return <span aria-hidden className={cn(tileVariants({ tone }), className)}>{icon}</span>;
-}
-
-/**
- * The app launcher: a grid of app tiles, each a link with a coloured icon, a label and an optional
- * description. Apps that are not built yet show a "Soon" badge and cannot be opened. An optional bar of
- * create shortcuts sits above the grid.
- */
-export function AppLauncher({
-  apps,
-  createActions,
-  currentKey,
-  LinkComponent = DefaultLink,
-  title,
-  className,
-  ...props
-}: AppLauncherProps) {
+/** The 3×3 grip icon that opens the launcher. */
+function GripIcon({ className }: { className?: string }) {
   return (
-    <section className={cn("flex flex-col gap-5", className)} {...props}>
-      {title ? <h2 className="text-[15px] font-semibold text-foreground">{title}</h2> : null}
-
-      {createActions && createActions.length > 0 ? (
-        <nav aria-label="Create" className="flex flex-wrap gap-2">
-          {createActions.map((action) => (
-            <LinkComponent
-              key={action.key}
-              href={action.href}
-              className="inline-flex h-8 items-center gap-2 rounded-full border border-input bg-background ps-1.5 pe-3 text-[13px] font-medium text-foreground transition-colors hover:bg-muted"
-            >
-              <AppTile icon={action.icon} tone={action.tone} className="size-6 rounded-full [&>*]:!size-[12px] [&>*]:!text-[12px]" label={action.label} />
-              {action.label}
-            </LinkComponent>
-          ))}
-        </nav>
-      ) : null}
-
-      <ul className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-2">
-        {apps.map((app) => {
-          const current = app.key === currentKey;
-          const body = (
-            <>
-              <AppTile icon={app.icon} tone={app.tone} label={app.label} />
-              <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-                <span className="flex items-center gap-2">
-                  <span className="truncate text-[13px] font-medium text-foreground">{app.label}</span>
-                  {app.soon ? (
-                    <span className="rounded bg-muted px-1.5 py-0.5 text-[11px] font-medium text-muted-foreground">Soon</span>
-                  ) : null}
-                </span>
-                {app.description ? (
-                  <span className="truncate text-[12px] text-muted-foreground">{app.description}</span>
-                ) : null}
-              </span>
-            </>
-          );
-          const base =
-            "flex items-center gap-3 rounded-lg border p-3 transition-colors";
-          return (
-            <li key={app.key}>
-              {app.soon ? (
-                <div aria-disabled="true" className={cn(base, "cursor-default border-border opacity-60")}>
-                  {body}
-                </div>
-              ) : (
-                <LinkComponent
-                  href={app.href}
-                  aria-current={current ? "page" : undefined}
-                  className={cn(
-                    base,
-                    "border-border hover:border-input hover:bg-muted/50 focus-visible:ring-2 focus-visible:ring-ring/40 outline-none",
-                    current && "border-primary bg-primary/5",
-                  )}
-                >
-                  {body}
-                </LinkComponent>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-    </section>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className={className}
+    >
+      {[5, 12, 19].flatMap((y) => [5, 12, 19].map((x) => <circle key={`${x}-${y}`} cx={x} cy={y} r="1" />))}
+    </svg>
   );
 }
 
-function DefaultLink({ href, ...props }: LinkProps) {
-  return <a href={href} {...props} />;
+/** A launcher tile: a coloured square with the icon, and the label under it. */
+export function AppTile({
+  label,
+  icon,
+  tone = "blue",
+  soon,
+  as: Comp,
+  href,
+  onNavigate,
+}: {
+  label: string;
+  icon: React.ReactNode;
+  tone?: AppTone;
+  soon?: boolean;
+  as: React.ComponentType<LinkProps>;
+  href: string;
+  onNavigate?: () => void;
+}) {
+  return (
+    <Comp
+      href={href}
+      onClick={onNavigate}
+      aria-disabled={soon || undefined}
+      tabIndex={soon ? -1 : undefined}
+      className={cn(
+        "flex flex-col items-center gap-2 rounded px-2 py-3 text-center text-[13px] leading-tight text-foreground outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring",
+        soon && "pointer-events-none opacity-50",
+      )}
+    >
+      <span className={cn("flex size-12 shrink-0 items-center justify-center rounded text-white shadow-sm [&>svg]:size-[22px]", TONE_BG[tone])}>
+        {icon}
+      </span>
+      <span className="line-clamp-2">{label}</span>
+    </Comp>
+  );
 }
+
+/**
+ * The app launcher: a grip button that opens a panel with a search box, a grid of app tiles and a row
+ * of create shortcuts. Styled like the Microsoft 365 app menu. Apps marked `soon` show greyed out.
+ */
+export function AppLauncher({
+  apps,
+  createActions = [],
+  LinkComponent = DefaultLink,
+  triggerLabel = "Open app launcher",
+  className,
+}: AppLauncherProps) {
+  const [open, setOpen] = React.useState(false);
+  const [query, setQuery] = React.useState("");
+
+  const q = query.trim().toLowerCase();
+  const filteredApps = q ? apps.filter((a) => a.label.toLowerCase().includes(q)) : apps;
+  const shownCreate = q ? [] : createActions;
+  const close = () => setOpen(false);
+
+  return (
+    <Popover
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next);
+        if (!next) setQuery("");
+      }}
+    >
+      <PopoverTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          type="button"
+          aria-label={triggerLabel}
+          aria-expanded={open}
+          className={cn("size-10 rounded text-foreground hover:bg-muted", className)}
+        >
+          <GripIcon className="size-5" />
+        </Button>
+      </PopoverTrigger>
+
+      <PopoverContent
+        side="bottom"
+        align="start"
+        sideOffset={8}
+        className="w-[min(94vw,600px)] rounded-lg p-0 shadow-xl"
+      >
+        <div className="px-5 pt-5 pb-4">
+          <div className="relative">
+            <SearchIcon className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              autoFocus
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Find an app"
+              aria-label="Find an app"
+              className="h-10 w-full rounded border-0 bg-muted ps-9 pe-3 text-[13px] focus:ring-2 focus:ring-ring"
+            />
+          </div>
+        </div>
+
+        <nav aria-label="Apps" className="px-5 pb-5">
+          {filteredApps.length === 0 ? (
+            <p className="py-8 text-center text-[13px] text-muted-foreground">No apps match “{query}”.</p>
+          ) : (
+            <ul className="grid grid-cols-3 gap-y-1 sm:grid-cols-5">
+              {filteredApps.map((app) => (
+                <li key={app.key}>
+                  <AppTile
+                    as={LinkComponent}
+                    href={app.href}
+                    label={app.label}
+                    icon={app.icon}
+                    tone={app.tone}
+                    soon={app.soon}
+                    onNavigate={close}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
+        </nav>
+
+        {shownCreate.length > 0 && (
+          <div className="border-t border-border px-5 py-4">
+            <ul className="grid grid-cols-3 gap-y-1 sm:grid-cols-5">
+              {shownCreate.map((action) => (
+                <li key={action.key}>
+                  <AppTile
+                    as={LinkComponent}
+                    href={action.href}
+                    label={action.label}
+                    icon={action.icon}
+                    tone={action.tone}
+                    onNavigate={close}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </PopoverContent>
+    </Popover>
+  );
+}
+
+const DefaultLink = React.forwardRef<HTMLAnchorElement, LinkProps>(function DefaultLink(props, ref) {
+  return <a ref={ref} {...props} />;
+});

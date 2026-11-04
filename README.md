@@ -87,16 +87,14 @@ that class on the element that should use it. Keep the same variable names, so e
 
 ## App launcher
 
-`AppLauncher` is the workspace's app grid: a tile per app with a coloured icon, a label and an optional
-description, plus a "Soon" badge for apps not built yet and an optional bar of create shortcuts. Tile colours
-are the `--tone-*` theme variables (`blue`, `red`, `orange`, `teal`, `purple`, `green`, `slate`, `pink`).
+`AppLauncher` is the workspace's app menu, the same as the Talabetak DMS launcher. It renders a grip button
+that opens a panel with a "Find an app" search box, a grid of square app tiles (3 columns, 5 on larger
+screens), and an optional row of create shortcuts. Apps marked `soon` show greyed out and cannot be opened.
+Filter apps by permission before passing them in. Tile colours are the `--tone-*` theme variables.
 
     <AppLauncher
-      title="Apps"
-      apps={[{ key: "orders", label: "Orders", href: "/orders", tone: "blue", icon: <OrdersIcon />,
-               description: "Incoming and active orders" }]}
+      apps={[{ key: "orders", label: "Orders", href: "/orders", tone: "blue", icon: <OrdersIcon /> }]}
       createActions={[{ key: "order", label: "New order", href: "/orders/new", tone: "blue", icon: <PlusIcon /> }]}
-      currentKey="orders"
       LinkComponent={Link}
     />
 
