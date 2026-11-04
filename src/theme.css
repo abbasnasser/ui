@@ -41,6 +41,16 @@
   --tooltip: #171717;
   --tooltip-foreground: #ffffff;
 
+  /* Tile colours for app icons. Their names are fixed; their values can be restyled per app. */
+  --tone-blue: #2f6fd6;
+  --tone-red: #d64545;
+  --tone-orange: #e0792b;
+  --tone-teal: #1f9d94;
+  --tone-purple: #7b58d6;
+  --tone-green: #3fa35b;
+  --tone-slate: #5c6b7a;
+  --tone-pink: #c8509a;
+
   --sidebar: #ffffff;
   --sidebar-foreground: #3a3a3a;
   --sidebar-border: #e3e3e3;
@@ -116,6 +126,14 @@
   --color-ring: var(--ring);
   --color-tooltip: var(--tooltip);
   --color-tooltip-foreground: var(--tooltip-foreground);
+  --color-tone-blue: var(--tone-blue);
+  --color-tone-red: var(--tone-red);
+  --color-tone-orange: var(--tone-orange);
+  --color-tone-teal: var(--tone-teal);
+  --color-tone-purple: var(--tone-purple);
+  --color-tone-green: var(--tone-green);
+  --color-tone-slate: var(--tone-slate);
+  --color-tone-pink: var(--tone-pink);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-border: var(--sidebar-border);

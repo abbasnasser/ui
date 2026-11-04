@@ -84,3 +84,18 @@ To restyle an app, override the variables in its own CSS, after the import:
 
 To add a theme, define a new block of variables (for example `.theme-green { --primary: ...; }`) and put
 that class on the element that should use it. Keep the same variable names, so every component still works.
+
+## App launcher
+
+`AppLauncher` is the workspace's app grid: a tile per app with a coloured icon, a label and an optional
+description, plus a "Soon" badge for apps not built yet and an optional bar of create shortcuts. Tile colours
+are the `--tone-*` theme variables (`blue`, `red`, `orange`, `teal`, `purple`, `green`, `slate`, `pink`).
+
+    <AppLauncher
+      title="Apps"
+      apps={[{ key: "orders", label: "Orders", href: "/orders", tone: "blue", icon: <OrdersIcon />,
+               description: "Incoming and active orders" }]}
+      createActions={[{ key: "order", label: "New order", href: "/orders/new", tone: "blue", icon: <PlusIcon /> }]}
+      currentKey="orders"
+      LinkComponent={Link}
+    />

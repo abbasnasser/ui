@@ -43,3 +43,4 @@ export { Empty, type EmptyProps } from "./empty";
 export { Field, FieldLabel, FieldDescription, FieldError } from "./field";
 export { Link } from "./link";
 export { ButtonGroup } from "./button-group";
+export { AppLauncher, AppTile, type AppLauncherProps, type LauncherApp, type LauncherCreateAction, type AppTone } from "./app-launcher";
