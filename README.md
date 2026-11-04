@@ -99,3 +99,28 @@ are the `--tone-*` theme variables (`blue`, `red`, `orange`, `teal`, `purple`, `
       currentKey="orders"
       LinkComponent={Link}
     />
+
+## Data table
+
+`DataTable` is built on TanStack Table, with every feature opt-in, so a plain list stays simple:
+
+- sorting (client, or server through `server.onSortingChange`), client-side search, column show/hide
+- row selection with select-all and an indeterminate header, plus a bulk-action bar
+- pagination on the client (`pageSize`), or on the server (`server` with the total)
+- loading skeleton, empty state, sticky header, row click, expandable rows, compact density
+
+Columns are plain TanStack `ColumnDef` objects. Example:
+
+    <DataTable
+      columns={columns}
+      data={orders}
+      getRowId={(r) => r.id}
+      searchable
+      selectable
+      columnVisibility
+      renderExpanded={(order) => <OrderDetail order={order} />}
+      bulkActions={(rows) => <Button size="sm">Export {rows.length}</Button>}
+    />
+
+Tested here: each main configuration renders on the server. Sorting, selection and expansion have not yet been
+exercised in a browser.

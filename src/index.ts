@@ -30,6 +30,7 @@ export {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
+  DropdownMenuCheckboxItem,
 } from "./dropdown-menu";
 export { Slider } from "./slider";
 export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "./collapsible";
@@ -44,3 +45,4 @@ export { Field, FieldLabel, FieldDescription, FieldError } from "./field";
 export { Link } from "./link";
 export { ButtonGroup } from "./button-group";
 export { AppLauncher, AppTile, type AppLauncherProps, type LauncherApp, type LauncherCreateAction, type AppTone } from "./app-launcher";
+export { DataTable, type DataTableProps, type DataTableServerState, type DataTableDensity } from "./data-table/data-table";
