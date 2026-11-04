@@ -11,6 +11,7 @@ import {
   TabsList, TabsTrigger, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, AppLauncher, cn,
   type SidebarApp, type LauncherApp, type AppTone,
 } from "../src";
+import { MoreSections } from "./more";
 
 /* Small stand-in icons, so the showcase needs no icon font. */
 const Dot = () => <span className="inline-block size-3.5 rounded-sm bg-current opacity-70" />;
@@ -92,6 +93,7 @@ export function App() {
             {[
               ["buttons", "Buttons"], ["forms", "Forms"], ["overlays", "Overlays"], ["navigation", "Navigation"],
               ["data", "Data"], ["feedback", "Feedback"], ["layout", "Layout"], ["sidebar", "Sidebar"], ["launcher", "App launcher"],
+              ["accordion", "Accordion"], ["alerts", "Alerts and dialogs"], ["menus", "Menus and command"], ["forms-more", "More form controls"], ["data-more", "Calendar, chart, carousel"], ["layout-more", "Layout and items"],
             ].map(([id, label]) => (
               <a key={id} href={`#${id}`} className="rounded-md px-2 py-1.5 text-muted-foreground hover:bg-muted hover:text-foreground">{label}</a>
             ))}
@@ -354,6 +356,7 @@ export function App() {
               />
               <Empty title="Nothing to show" description="Shown when no app is open." />
             </Section>
+            <MoreSections />
           </main>
         </div>
       </div>
