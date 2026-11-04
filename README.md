@@ -5,6 +5,10 @@ Shared component library for our apps. Cloudflare-style density and tokens, buil
 
 ## Use in an app
 
+Apps must also scan the library's classes, because Tailwind v4 skips node_modules:
+
+    @source "../node_modules/@your-scope/ui/dist/**/*.js";
+
     npm install @your-scope/ui
 
 In the app's global CSS (Tailwind v4):
