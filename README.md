@@ -55,5 +55,12 @@ over the content, and Ctrl/Cmd+B to collapse. It takes plain data, so it has no 
       LinkComponent={Link} // for example Next.js's Link
     />
 
+Everything beyond `key`, `label` and `href` is optional:
+
+- `icon` on an app or page. Without an app icon, its first letter stands in for it in the rail.
+- `pages`. An app with none is a plain link.
+- `tree` on `Sidebar`. On by default, it draws the line that joins an app to its pages. Off gives a flat list, indented under the app.
+- `soon` and `ready: false` grey out an app or page with a "Soon" badge.
+
 Colours come from the `--ui-sidebar-*` tokens. Icons must be centred in their box; set `iconOffset` in pixels
 for any icon whose glyph sits off-centre. The chevron is drawn with SVG, so the library needs no icon font.

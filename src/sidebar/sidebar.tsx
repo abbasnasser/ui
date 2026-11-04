@@ -24,7 +24,8 @@ export type SidebarApp = {
   key: string;
   label: string;
   href: string;
-  icon: React.ReactNode;
+  /** Optional. Without one, the app's first letter stands in for it in the rail and the list. */
+  icon?: React.ReactNode;
   /** Apps with the same group share a block, separated by a divider. */
   group?: string;
   /** Pages of this app. An app with none is not opened as a list. */
@@ -55,6 +56,8 @@ export type SidebarProps = {
   footer?: React.ReactNode;
   /** Ctrl/Cmd+B toggles collapse. On by default. */
   shortcut?: boolean;
+  /** Draws the vertical line that joins an app to its pages. On by default; off gives a flat, indented list. */
+  tree?: boolean;
   className?: string;
 };
 
@@ -72,6 +75,7 @@ export function Sidebar({
   header,
   footer,
   shortcut = true,
+  tree = true,
   className,
 }: SidebarProps) {
   const [peek, setPeek] = React.useState(false);
@@ -166,6 +170,7 @@ export function Sidebar({
             activeAppKey={activeAppKey}
             collapsed={showRail}
             LinkComponent={LinkComponent}
+            tree={tree}
             onNavigate={() => {
               setPeek(false);
               onNavigate?.();
@@ -199,6 +204,7 @@ function SidebarNav({
   activeAppKey,
   collapsed,
   LinkComponent,
+  tree,
   onNavigate,
 }: {
   apps: SidebarApp[];
@@ -206,6 +212,7 @@ function SidebarNav({
   activeAppKey?: string;
   collapsed: boolean;
   LinkComponent: LinkComponentType;
+  tree: boolean;
   onNavigate: () => void;
 }) {
   const [openKeys, setOpenKeys] = React.useState<string[]>(() => (activeAppKey ? [activeAppKey] : []));
@@ -243,6 +250,7 @@ function SidebarNav({
                 activePath={activePath}
                 collapsed={collapsed}
                 LinkComponent={LinkComponent}
+                tree={tree}
                 onOpen={() => open(app.key)}
                 onToggle={() => toggle(app.key)}
                 onNavigate={onNavigate}
@@ -262,6 +270,7 @@ function AppRow({
   activePath,
   collapsed,
   LinkComponent,
+  tree,
   onOpen,
   onToggle,
   onNavigate,
@@ -272,6 +281,7 @@ function AppRow({
   activePath: string;
   collapsed: boolean;
   LinkComponent: LinkComponentType;
+  tree: boolean;
   onOpen: () => void;
   onToggle: () => void;
   onNavigate: () => void;
@@ -308,7 +318,7 @@ function AppRow({
               style={{ translate: `${app.iconOffset ?? 0}px 0` }}
               className="flex h-5 w-4 shrink-0 items-center justify-center text-[14px] leading-none text-[var(--ui-sidebar-icon)] [&>*]:!size-[14px] [&>*]:!text-[14px] [&>*]:!leading-none"
             >
-              {app.icon}
+              {app.icon ?? <span className="text-[12px] leading-none font-semibold uppercase">{app.label.charAt(0)}</span>}
             </span>
             <span
               className={cn(
@@ -356,6 +366,7 @@ function AppRow({
           open={open && !collapsed}
           collapsed={collapsed}
           LinkComponent={LinkComponent}
+          tree={tree}
           onNavigate={onNavigate}
         />
       )}
@@ -388,6 +399,7 @@ function AppPages({
   open,
   collapsed,
   LinkComponent,
+  tree,
   onNavigate,
 }: {
   pages: SidebarPage[];
@@ -395,6 +407,7 @@ function AppPages({
   open: boolean;
   collapsed: boolean;
   LinkComponent: LinkComponentType;
+  tree: boolean;
   onNavigate: () => void;
 }) {
   // Opening and closing animate the list's height (250ms). Closed lists are inert, so they cannot be focused.
@@ -407,7 +420,7 @@ function AppPages({
       )}
     >
       <div className="min-h-0 overflow-hidden">
-        {/* A tree: the line runs down from the app icon, so the list has no gaps between rows. */}
+        {/* With the tree on, the line runs down from the app icon; with it off, the pages are just indented. */}
         <div className="relative ms-5 mt-1">
           <ul>
             {pages.map((page, index) => (
@@ -421,6 +434,7 @@ function AppPages({
                 last={index === pages.length - 1}
                 collapsed={collapsed}
                 LinkComponent={LinkComponent}
+                tree={tree}
                 onNavigate={onNavigate}
               />
             ))}
@@ -440,6 +454,7 @@ function PageLink({
   last,
   collapsed,
   LinkComponent,
+  tree,
   onNavigate,
 }: {
   page: SidebarPage;
@@ -450,13 +465,16 @@ function PageLink({
   last: boolean;
   collapsed: boolean;
   LinkComponent: LinkComponentType;
+  tree: boolean;
   onNavigate: () => void;
 }) {
   // Tree line: one vertical line down the left, from the app icon to the last page.
-  const treeItem = cn(
-    "relative ps-[9px] pe-[5px] py-px before:absolute before:start-0 before:top-0 before:border-s before:border-[var(--ui-sidebar-border)] before:content-['']",
-    last ? "before:h-1/2" : "before:h-full",
-  );
+  const treeItem = tree
+    ? cn(
+        "relative ps-[9px] pe-[5px] py-px before:absolute before:start-0 before:top-0 before:border-s before:border-[var(--ui-sidebar-border)] before:content-['']",
+        last ? "before:h-1/2" : "before:h-full",
+      )
+    : "py-px";
   const ready = page.ready !== false;
   // Closing is the opening played backwards: the stagger runs from the last page to the first.
   const base = cn(
