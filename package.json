@@ -1,6 +1,6 @@
 {
   "name": "@abbasnasser/ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Shared Cloudflare-style component library for our apps",
   "type": "module",
   "main": "./dist/index.js",
